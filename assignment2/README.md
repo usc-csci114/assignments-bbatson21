@@ -21,6 +21,7 @@ struct Element {
 	string type; //e.g. "transitional metals", "noble gas"
 };
 ```
+
 The data for the period table will be given as a comma seperated data file with one element per line. There will be 118 elements, though they may not be in the data file in numerical order. The first line of the file can help you figure out which column in th data contains the various data items. The first line should be ignored by your program.
 
 #### The program
