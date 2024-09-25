@@ -104,16 +104,16 @@ int main(){
             cout << setw(edge1) << "" << title << setw(edge2) << "" << endl; 
         }
         else if(i % 2 != 0){
-            for(int i = 0; i < 101; i++){
+            for(int i = 0; i < 98; i++){
                 cout << "-"; 
             }
             cout << endl; 
         }
         else if(i == 2){  
-            cout << "|            | sepal length       | sepal width        | petal length        | petal width          |" << endl; 
+            cout << "|            | sepal length       | sepal width        | petal length       | petal width        |" << endl; 
         }
         else if(i == 4){
-            cout << "| setosa |";
+            cout << "|   setosa   |";
             print_segment(set_sep_l);
             print_segment(set_sep_w);
             print_segment(set_pet_l);
@@ -129,7 +129,7 @@ int main(){
             cout << endl; 
         }
         else if(i == 8){
-            cout << "| virginica |";
+            cout << "| virginica  |";
             print_segment(vir_sep_l);
             print_segment(vir_sep_w);
             print_segment(vir_pet_l);

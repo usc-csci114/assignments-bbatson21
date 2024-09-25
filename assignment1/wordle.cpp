@@ -29,6 +29,7 @@ int main()
 
     vector<string> board(6, "*****"); 
     word = get_word(word_list);  
+    //cout << word << endl; //debugging 
     int guess_cnt = 0; 
     
     cout << "Welcome to Wordle!" << endl; 
@@ -49,11 +50,12 @@ int main()
         else if(guess == "new"){
             guess_cnt = 0; 
             word = get_word(word_list); 
+            board.assign(6, "*****");
+            //cout << word << endl; //debugging 
             cout << "Welcome to Wordle!" << endl; 
             for(int i=0; i < 6; i++){
                 cout << board[i] << endl; 
-            }
-            cout << "Enter your guess:" << endl; 
+            } 
         }
         else if(guess_size != 5){
             cout << "Unable to parse input, please try again." << endl; 
@@ -66,39 +68,41 @@ int main()
             int match = inplace_cnt(guess, word); 
             //bool in_word = letter_inword(guess, word); 
             string updated_word = ""; //remember to add updated word to new vector
+            //new try
             for(int i=0; i < guess.length(); i++){
-                if(word[i] == guess[i]){
-                    updated_word += green + guess[i] + coloroff; 
+                if(guess[i] == word[i]){
+                        updated_word += green + guess[i] + coloroff; 
                 }
                 else{
-                    bool is_present = letter_inword(guess, word); //make this function check at a specific index?, then can just update without looping
-                    for(int j=0; j < guess.length(); j++){
-                        if(word[j] == guess[i] && guess[j] != word[j]){
-                            updated_word += yellow + guess[i] + coloroff; 
-                            is_present = true; 
+                    for(int j=0; j < guess.length(); j++){                    
+                        if(guess[i] == word[j] && guess[i] != guess[j]){
+                            updated_word += yellow + guess[i] + coloroff;
                             break; 
+                        } 
+                        else if(j == guess.length() - 1){ //if you made it to the end of the word
+                            updated_word += coloroff + guess[i];
                         }
-                    }
-                    if(is_present == false){
-                        updated_word += coloroff + guess[i]; 
-                    }
+                    }   
                 }
-                
-            }
-            board[guess_cnt - 1] = updated_word;
-            for(int i = 0; i < 6; i++){
-                cout << board[i] << endl; 
-            }
-            if(match == 5){
-                cout << "Congratulations! Begin a new game or quit at the next prompt." << endl; 
-            }
-            else if(guess_cnt == 6){
-                cout << "Sorry, the correct word was:" << word << endl; 
-                cout << "Begin a new game or quit at the next prompt" << endl; 
             }
             
+                board[guess_cnt - 1] = updated_word;
+                for(int i = 0; i < 6; i++){
+                    cout << board[i] << endl; 
+                }
+                if(match == 5){
+                    cout << "Congratulations! Would you like to quit or start a new game?" << endl;  
+                }
+                else if(guess_cnt == 6){
+                    cout << "Sorry, the correct word was: " << word << endl; 
+                    cout << "Begin a new game by entering 'new' or enter 'quit' at the next prompt" << endl;
+                    board.assign(6, "*****");  
+                }
+                
+            } //check where this should be for declaration 
+            
         }        
-    }
+    
 
 
     return 0; 
