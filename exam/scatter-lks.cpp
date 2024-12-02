@@ -90,14 +90,14 @@ int main(){
     for(int i=0; i < totals.size(); i++){
         double num_i, denom_i; 
         num_i = (totals[i] - tot_mean) * (moon_phases[i] - moon_mean); 
-        denom_i = (totals[i] - tot_mean) * (totals[i] - tot_mean); 
+        denom_i = (moon_phases[i] - moon_mean) * (moon_phases[i] - moon_mean); 
 
         num += num_i; 
         denom += denom_i; 
     }
 
     beta = num / denom; 
-    double alpha = moon_mean - (beta * tot_mean); 
+    double alpha = tot_mean - (beta * moon_mean); 
 
     int size = totals.size(); 
     std::vector<double> f_vals(size); 
@@ -110,9 +110,9 @@ int main(){
         std::cout << "f is " << f << std::endl; 
 
         double sr, st; 
-        sr = (moon_phases[i] - f) * (moon_phases[i] - f); 
+        sr = (totals[i] - f) * (totals[i] - f); 
         ss_res += sr; 
-        st = (moon_phases[i] - moon_mean) * (moon_phases[i] - moon_mean); 
+        st = (totals[i] - tot_mean) * (totals[i] - tot_mean); 
         ss_tot += st;
     }
 
@@ -122,13 +122,13 @@ int main(){
     std::cout << "R^2 value: " << r_sq << std::endl; 
 
 
-    plot(totals, moon_phases, "rx"); 
+    plot(moon_phases, totals, "rx"); 
     hold(on); 
-    plot(totals, f_vals, "b-"); 
-    xlabel("Total Bugs at site (LKS and Stunt)"); 
-    ylabel("Moon phase"); 
+    plot(moon_phases, f_vals, "b-"); 
+    xlabel("Moon phase"); 
+    ylabel("Total Bugs at LKS and Stunt"); 
     show(); 
-    save("lk-stunt.png"); 
+    save("lks.png");
 
     return 0; 
 }
