@@ -125,7 +125,7 @@ int main(){
     plot(totals, moon_phases, "rx"); 
     hold(on); 
     plot(totals, f_vals, "b-"); 
-    xlabel("Total Bugs at site (BG)"); 
+    xlabel("Total Bugs at site (LKS and Stunt)"); 
     ylabel("Moon phase"); 
     show(); 
     save("lk-stunt.png"); 
